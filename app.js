@@ -82,7 +82,9 @@ app.post('/creatUsers',(req,res)=>{
       }else{
          res.status(404).send("user not found")
       }
-      } , (error)=>{res.status(400)}) 
+      } 
+      
+      , (error)=>{res.status(400)}) 
   })
 
 
