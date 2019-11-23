@@ -1,8 +1,8 @@
 const express = require ('express')
 const bodyParser = require('body-parser')
 
-const connect =require('./model/config')
-const User    =require('./model/db/db')
+const connect =require('./models/config')
+const User = require('./models/Users/user')
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -41,10 +41,10 @@ app.post('/creatUsers',(req,res)=>{
    
     // takeing object from the user schema
     var user =new User ({
-        username: req.body.username,
-        
-       email: req.body.email,
-       age:req.body.age
+      
+      username: req.body.username,
+      email: req.body.email,
+      password:req.body.password
     })
      
     /**
@@ -52,9 +52,11 @@ app.post('/creatUsers',(req,res)=>{
      * after user is created ,send him back to the client
      * if any error happen notify the client
      */
-    user.save().then((user)=>{res.status(200).send(`${user} `)}
-    ,(error)=>{ res.status(400) , console.log(error)
+    user.save()
+    .then(()=>{ return user.genAuthToken()
     })
+    .then((token)=>{res.header('X-Auth',token).status(200).send(user)})
+    .catch((error)=>{ res.send(error).status(500)})
   })
    //delete specific user from the db
   app.delete('/deleteUser/:id',(req,res)=>{
@@ -71,11 +73,11 @@ app.post('/creatUsers',(req,res)=>{
 
    User.findByIdAndUpdate(req.params.id)
    .then((user)=>{
-     
+        //you need to modify this code
      if(user){
         user.username = (req.body.username)? req.body.username : user.username,
         user.email = (req.body.email)? req.body.email : user.email,
-        user.age = (req.body.age)? req.body.age :user.age
+        user.password= (req.body.password)? req.body.password :user.password
 
          user.save().then((client)=>{res.status(200).send(client)},
          (error)=>{res.status(500).send(error)})
