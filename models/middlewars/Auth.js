@@ -1,0 +1,27 @@
+const {User} =require('./../Users/user');
+
+
+var Authentication = function(req,res,next){
+
+    var token = req.header('X-Auth');
+
+    User.findByToken(token).then((user)=>{
+    
+      if(!user){
+         //redirect the error 
+        return promise.reject();
+     }  
+     
+     req.user = user;
+     req.token = token;
+     next();
+    }).catch((error)=>{
+
+      res.status(400).send();
+    })
+
+   
+       
+}
+
+module.exports ={Authentication}

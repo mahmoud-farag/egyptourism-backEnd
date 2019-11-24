@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const jwt = require('jsonwebtoken')
 const _=require('lodash');
-  var UserSchema = new mongoose.Schema({
+const bcrypt = require('bcryptjs');  
+
+
+var UserSchema = new mongoose.Schema({
     
     username: {
       
@@ -53,35 +56,92 @@ const _=require('lodash');
 
 
 
+
+/**
+ * the User model methods
+ */
+
+UserSchema.statics.findByToken = function(token){
+  
+   var UserModel = this;
+   var decoded ;
+   
+   try{
+    decoded = jwt.verify(token ,'secretSult');
+   }
+   catch{
+
+      // return new Promise((resolve,reject)=>{
+      //        reject();
+      //  })
+        return Promise.reject();
+   }
+   return  UserModel.findOne({
+      '_id':decoded._id,
+      'tokens.access':decoded.access,
+      'tokens.token':token
+    })
+      
+}
+
+
+/*
+    the user instaces methods
+  */
+ //generating the Authentication token for each user
+UserSchema.methods.genAuthToken =function (){
+
+   var userInstance = this ;
+   var access='Auth';
+     
+   var token = jwt.sign({_id:userInstance._id.toHexString(),access},'secretSult').toString();
+              
+   
+
+  // userInstance.tokens =userInstance.tokens.concat([{access,token}])
+     userInstance.tokens.push({access,token})
+ 
+    //???
+   return userInstance.save().then(()=>{ return token});
+   
+
+}
+
 //override method toJSON to customize which data will be send to the user  
 UserSchema.methods.toJSON = function(){
 
-     var user = this;
-    //  var userObj = user.toObject();    
-     return  _.pick(user,['username','email']);
+  var user = this;
+ //  var userObj = user.toObject();    
+  return  _.pick(user,['username','email']);
 
 }
 
 
-//generating the Authentication token for each user
-UserSchema.methods.genAuthToken =function (){
+//hashing the password useing the preproccessing 
+UserSchema.pre('save',function(next){
+    //i does not use arrow func to be able to use 'this' keyword
+   var user =this 
+      //do hashing process only if the password has modified
+   if(user.isModified('password')){
+      
+    //generate salting 
+      bcrypt.genSalt(5,(error,salt)=>{
 
-   var user = this ;
-   var access='Auth';
-     
-   var token = jwt.sign({_id:user._id.toHexString(),access},'secretSult').toString();
-   
+            // if(error)  return promise.reject();
+            bcrypt.hash(user.password,salt,(error ,hash)=>{
 
- //  user.tokens =user.tokens.concat([{access,token}])
-     user.tokens.push({access,token})
- 
+              // if(error) return promise.reject();
+               user.password = hash;
+              next();
 
-   return user.save().then(()=>{ return token});
-   
-
-}
-
+            })
+      })
+   }else{
+       //continue execute the callback queue
+     next();
+   }
+})
 
  var User = mongoose.model('user',UserSchema)
  
- module.exports = (User)
+ module.exports = {User}

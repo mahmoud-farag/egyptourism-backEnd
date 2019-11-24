@@ -1,14 +1,14 @@
-const express = require ('express')
-const bodyParser = require('body-parser')
+const express = require ('express');
+const bodyParser = require('body-parser');
+const _ = require('lodash');
 
-const connect =require('./models/config')
-const User = require('./models/Users/user')
+const connect =require('./models/config');
+const {User} = require('./models/Users/user');
+const {Authentication} = require('./models/middlewars/Auth');
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-
-
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -39,13 +39,9 @@ app.get('/getUser/:id',(req,res)=>{
  //adding new user to the db
 app.post('/creatUsers',(req,res)=>{
    
+    var body = _.pick(req.body,['username','email','password']);
     // takeing object from the user schema
-    var user =new User ({
-      
-      username: req.body.username,
-      email: req.body.email,
-      password:req.body.password
-    })
+    var user =new User (body)
      
     /**
      * save that specific user to the db
@@ -55,7 +51,7 @@ app.post('/creatUsers',(req,res)=>{
     user.save()
     .then(()=>{ return user.genAuthToken()
     })
-    .then((token)=>{res.header('X-Auth',token).status(200).send(user)})
+    .then((token)=>{res.header('X-Auth',token).status(200).send(user)} )
     .catch((error)=>{ res.send(error).status(500)})
   })
    //delete specific user from the db
@@ -89,7 +85,18 @@ app.post('/creatUsers',(req,res)=>{
       , (error)=>{res.status(400)}) 
   })
 
+//find by token
 
+app.get('/getByToken', Authentication , (req,res)=>{
+
+      res.status(200).send(req.user)
+      .then((e)=>{
+        
+         res.status(400).send();
+  
+      })
+       
+})
 
 
 app.listen(PORT,()=>{
