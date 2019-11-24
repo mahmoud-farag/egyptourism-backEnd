@@ -16,5 +16,12 @@
     "lodash": "^4.17.15",
     "mongoose": "^5.7.9",
     "validator": "^12.1.0"
+  },
+  "devDependencies": {
+    "expect": "^24.9.0",
+    "mocha": "^6.2.2",
+    "nodemon": "^2.0.1",
+    "rewire": "^4.0.1",
+    "supertest": "^4.0.2"
   }
 }

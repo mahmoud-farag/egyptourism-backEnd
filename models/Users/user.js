@@ -74,7 +74,7 @@ UserSchema.statics.findByToken = function(token){
       // return new Promise((resolve,reject)=>{
       //        reject();
       //  })
-        return Promise.reject();
+        return Promise.reject('invalide token');
    }
    return  UserModel.findOne({
       '_id':decoded._id,
@@ -84,7 +84,46 @@ UserSchema.statics.findByToken = function(token){
       
 }
 
+UserSchema.statics.FindByGroup = function (email,password){
 
+    var  UserModel =this;
+
+     return  UserModel.findOne({email}).then((user)=>{
+         
+          if(!user)
+              return Promise.reject('emial not found');
+          
+          return new Promise((resolve ,reject) =>{
+             bcrypt.compare(password,user.password,(error,result)=>{
+                
+                  if(result)
+                     resolve(user)
+                  else
+                     reject('invalid email or password')
+                   })
+              })    
+     })
+      
+    // return UserModel.findOne({email}).then((user)=>{
+
+    //     if(user){
+  
+    //        bcrypt.compare(password,user.password).then((match)=>{
+
+    //            if(match){
+    //              return Promise.resolve(user);
+
+    //            }else{
+    //              return Promise.reject('invalide  email or password');
+    //            }
+    //        });
+
+       
+    //     }else{
+    //        return Promise.reject('user not found');
+    //     }
+    // })
+}
 /*
     the user instaces methods
   */
@@ -95,8 +134,6 @@ UserSchema.methods.genAuthToken =function (){
    var access='Auth';
      
    var token = jwt.sign({_id:userInstance._id.toHexString(),access},'secretSult').toString();
-              
-   
 
   // userInstance.tokens =userInstance.tokens.concat([{access,token}])
      userInstance.tokens.push({access,token})
@@ -104,7 +141,6 @@ UserSchema.methods.genAuthToken =function (){
     //???
    return userInstance.save().then(()=>{ return token});
    
-
 }
 
 //override method toJSON to customize which data will be send to the user  
@@ -143,5 +179,5 @@ UserSchema.pre('save',function(next){
 })
 
  var User = mongoose.model('user',UserSchema)
- 
+
  module.exports = {User}

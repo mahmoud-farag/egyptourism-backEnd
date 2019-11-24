@@ -9,7 +9,7 @@ var Authentication = function(req,res,next){
     
       if(!user){
          //redirect the error 
-        return promise.reject();
+        return promise.reject('not found');
      }  
      
      req.user = user;
@@ -17,7 +17,7 @@ var Authentication = function(req,res,next){
      next();
     }).catch((error)=>{
 
-      res.status(400).send();
+      res.status(400).send(error);
     })
 
    

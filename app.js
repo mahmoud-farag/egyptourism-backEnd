@@ -5,7 +5,7 @@ const _ = require('lodash');
 const connect =require('./models/config');
 const {User} = require('./models/Users/user');
 const {Authentication} = require('./models/middlewars/Auth');
-
+const {validateEmail} = require('./models/middlewars/emailValidation')
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -86,17 +86,33 @@ app.post('/creatUsers',(req,res)=>{
   })
 
 //find by token
-
 app.get('/getByToken', Authentication , (req,res)=>{
 
       res.status(200).send(req.user)
-      .then((e)=>{
-        
-         res.status(400).send();
-  
-      })
+      
        
 })
+
+//login route
+app.get('/login',(req,res)=>{
+
+   let body = _.pick(req.body,['email','password']);
+      if(!validateEmail(body.email) && !(body.password.length<4)){
+         res.status(400).send('invalide email or password');
+      }
+      else{
+          User.FindByGroup(body.email,body.password).then((user)=>{
+
+          return user.genAuthToken().then((token)=>{
+            res.status(200).header('X-Auth',token).send('user logged in successfully');
+           })
+        
+           }).catch((error)=>{
+           res.status(400).send(error);
+           })
+         }
+})
+
 
 
 app.listen(PORT,()=>{
