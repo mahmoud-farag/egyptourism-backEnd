@@ -12,6 +12,7 @@ var Authentication = function(req,res,next){
         return promise.reject('not found');
      }  
      
+     console.log(user)
      req.user = user;
      req.token = token;
      next();
