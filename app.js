@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-/////////////////////////////////
+
 //getall users
 app.use('/user', user_router);
 //getUserById
@@ -18,6 +18,12 @@ app.use('/user', user_router);
 app.use('/user', user_router);
 //update user
 app.use('/updateUser', user_router);
+//login route
+app.use('/login', user_router);
+//login route
+app.use('/login', user_router);
+//login route
+app.use('/login', user_router);
 //login route
 app.use('/login', user_router);
 
