@@ -1,12 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const path = require('path');
 const { consfig } = require('./models/config');
 const user_router = require('./routes/user_router');
 const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 //getall users
 app.use('/user', user_router);
