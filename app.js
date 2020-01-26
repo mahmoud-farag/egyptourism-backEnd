@@ -20,12 +20,6 @@ app.use('/user', user_router);
 app.use('/updateUser', user_router);
 //login route
 app.use('/login', user_router);
-//login route
-app.use('/login', user_router);
-//login route
-app.use('/login', user_router);
-//login route
-app.use('/login', user_router);
 
 app.listen(PORT, () => {
 	console.log(`server running on port  ${PORT}`);
