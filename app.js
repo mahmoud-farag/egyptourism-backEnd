@@ -1,11 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const { consfig } = require('./models/config');
+const { config } = require('./models/config');
 const user_router = require('./routes/user_router');
 
 const PORT = process.env.PORT || 4000;
 const app = express();
+
+
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -19,6 +22,14 @@ if (process.env.NODE_ENV === "production") {
 	})
 
 }
+app.get('/', (req, res) => {
+
+	try {
+		config
+	} catch (e) {
+		res.send(e)
+	}
+})
 
 //getall users
 app.use('/user', user_router);
