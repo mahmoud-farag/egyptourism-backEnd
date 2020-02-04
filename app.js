@@ -9,7 +9,7 @@ const app = express();
 
 
 
-
+/////////////////////////////////////////////////////////
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -22,15 +22,6 @@ if (process.env.NODE_ENV === "production") {
 	})
 
 }
-app.get('/', (req, res) => {
-
-	try {
-		config
-	} catch (e) {
-		res.send(e)
-	}
-})
-
 //getall users
 app.use('/user', user_router);
 //getUserById
