@@ -1,5 +1,4 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 
 const user_controller = require('../controller/user_controller');
 
@@ -9,7 +8,7 @@ router.route('/getAll').get(user_controller.get_all);
 
 router.route('/:id').get(user_controller.getUserById);
 
-router.route('/signup').post(user_controller.signUp);
+router.route('/signup').post(user_controller.signUp)
 
 router.route('/:id').delete(user_controller.deleteUser);
 
