@@ -23,7 +23,7 @@ else {
 }
 
 
-mongoose.connect(localUri, {
+mongoose.connect(uri, {
 	useUnifiedTopology: true,
 	useNewUrlParser: true,
 	useCreateIndex: true
@@ -35,4 +35,4 @@ var db = mongoose.connection;
 module.exports = db;
 
 const x = 'd';
-// console.log("TCL: x", x)
+

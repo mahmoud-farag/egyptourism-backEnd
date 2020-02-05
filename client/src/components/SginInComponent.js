@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class SignInForm extends Component {
-    constructor() {
-        super();
+class SignInFormComponent extends Component {
+    constructor(props) {
+        super(props);
 
         this.state = {
             email: '',
@@ -54,4 +54,4 @@ class SignInForm extends Component {
     }
 }
 
-export default SignInForm;
+export default SignInFormComponent;

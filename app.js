@@ -3,18 +3,14 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const { config } = require('./models/config');
 const user_router = require('./routes/user_router');
-
+const cors = require('cors');
 const PORT = process.env.PORT || 4000;
 const app = express();
 
 
-var func = () => {
-
-
-}
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.use(cors())
 if (process.env.NODE_ENV === "production") {
 
 	app.use(express.static('client/build'));

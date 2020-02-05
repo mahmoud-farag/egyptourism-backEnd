@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 class SignUpFormComponent extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             email: '',
@@ -26,11 +26,28 @@ class SignUpFormComponent extends Component {
         });
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
+    async handleSubmit(e) {
+        e.preventDefault()
 
-        console.log('The form was submitted with the following data:');
-        console.log(this.state);
+        var NewUser = {
+            username: this.state.name,
+            email: this.state.email,
+            password: this.state.password
+        }
+        try {
+            var response = await axios.post('http://localhost:4000/user/signUp', NewUser);
+
+            console.log(response)
+        } catch (error) {
+            console.log(error);
+        }
+
+        this.setState({
+            email: '',
+            password: '',
+            name: '',
+            hasAgreed: false
+        });
     }
 
     render() {
