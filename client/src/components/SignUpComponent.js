@@ -35,7 +35,7 @@ class SignUpFormComponent extends Component {
             password: this.state.password
         }
         try {
-            var response = await axios.post('http://localhost:4000/user/signUp', NewUser);
+            var response = await axios.post('https://mighty-plains-74729.herokuapp.com/user/signUp', NewUser);
 
             console.log(response)
         } catch (error) {
