@@ -1,11 +1,6 @@
 const _ = require('lodash');
-const mongoose = require('mongoose');
-//remove this after you make a validation from the front
-const { validateEmail } = require('./../models/middlewars/emailValidation');
-const { User, UserSchema } = require('./../models/Users/user');
-const jwt = require('jsonwebtoken')
+const { User } = require('./../models/user');
 const bcrypt = require('bcryptjs');
-
 
 var login = async (req, res, next) => {
 

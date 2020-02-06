@@ -1,16 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const { config } = require('./models/config');
+const { db } = require('./configerations.js/dbConfig');
 const user_router = require('./routes/user_router');
 const cors = require('cors');
+require('dotenv').config()
 const PORT = process.env.PORT || 4000;
 const app = express();
 
 
+//app.use(cors()) this line must be before the body-parser 
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors())
+
+
 if (process.env.NODE_ENV === "production") {
 
 	app.use(express.static('client/build'));
