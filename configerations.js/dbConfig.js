@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === "production") {
 
 }
 
-console.log('uri' + process.env.localUri);
+// console.log('uri  :' + process.env.localUri);
 mongoose.connect(uri, {
     useUnifiedTopology: true,
     useNewUrlParser: true,

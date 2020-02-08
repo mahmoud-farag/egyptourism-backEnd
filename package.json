@@ -1,5 +1,5 @@
 {
-	"name": "crud-api",
+	"name": "Egyptorism",
 	"version": "1.0.0",
 	"description": "",
 	"main": "app.js",
@@ -27,10 +27,12 @@
 		"server": "nodemon app.js",
 		"client": "npm start --prefix clinet",
 		"dev": "concurrently \"npm run server \"  \"npm run client\"",
+		"test": "mocha ",
+		"test-watch": "nodemon --exec \"npm test\"",
 		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=FALSE npm install --prefix client && npm run build --prefix client"
 	},
 	"devDependencies": {
-		"expect": "^24.9.0",
+		"expect": "^25.1.0",
 		"mocha": "^6.2.2",
 		"nodemon": "^2.0.2",
 		"rewire": "^4.0.1",

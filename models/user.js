@@ -127,14 +127,14 @@ UserSchema.methods.genAuthToken = function () {
 
 }
 
-// //override method toJSON to customize which data will be send to the user  
-// UserSchema.methods.toJSON = function(){
+//override method toJSON to customize which data will be send to the user  
+UserSchema.methods.toJSON = function () {
 
-//  var user = this;
-// //  var userObj = user.toObject();    
-//  return  _.pick(user,['username','email']);
+    var user = this;
+    //  var userObj = user.toObject();    
+    return _.pick(user, ['username', 'email', 'password', 'tokens']);
 
-// }
+}
 
 
 //hashing the password useing the preproccessing 
@@ -165,4 +165,4 @@ UserSchema.pre('save', function (next) {
 
 var User = mongoose.model('user', UserSchema)
 
-module.exports = { User, UserSchema }
+module.exports = { User }
