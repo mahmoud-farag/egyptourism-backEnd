@@ -19,8 +19,15 @@ if (process.env.NODE_ENV === "production") {
 	})
 }
 app.use('/user', user_router);
+app.get('/user', (req, res) => {
+	res.send('Egyptorism')
+})
 app.use('/travls', travel_raouter)
 
 app.listen(PORT, () => {
 	console.log(`server running on port  ${PORT}`);
 });
+
+
+
+module.exports = { app }

@@ -37,5 +37,8 @@
 		"nodemon": "^2.0.2",
 		"rewire": "^4.0.1",
 		"supertest": "^4.0.2"
+	},
+	"engines": {
+		"node": "16.10.0"
 	}
 }
