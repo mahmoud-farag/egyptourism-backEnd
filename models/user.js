@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
-const jwt = require('jsonwebtoken')
-const _ = require('lodash');
-const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose'),
+    validator = require('validator'),
+    jwt = require('jsonwebtoken'),
+    _ = require('lodash'),
+    bcrypt = require('bcryptjs');
 
 
 var UserSchema = new mongoose.Schema({
@@ -52,11 +52,6 @@ var UserSchema = new mongoose.Schema({
 
     }]
 });
-
-
-
-
-
 /**
  * the User model methods
  */
@@ -68,7 +63,7 @@ UserSchema.statics.findByToken = function (token) {
 
     try {
 
-        decoded = jwt.verify(token, 'secretSult');
+        decoded = jwt.verify(token, 'egyptourism');
         console.log(decoded)
     }
 
@@ -117,14 +112,13 @@ UserSchema.methods.genAuthToken = function () {
     var userInstance = this;
     var access = 'Auth';
 
-    var token = jwt.sign({ _id: userInstance._id.toHexString(), access }, 'secretSult').toString();
+    var token = jwt.sign({ _id: userInstance._id.toHexString(), access }, 'egyptourism').toString();
 
     // userInstance.tokens =userInstance.tokens.concat([{access,token}])
     userInstance.tokens.push({ access, token })
 
     //???
     return userInstance.save().then(() => { return token });
-
 }
 
 //override method toJSON to customize which data will be send to the user  
@@ -135,7 +129,6 @@ UserSchema.methods.toJSON = function () {
     return _.pick(user, ['username', 'email', 'password', 'tokens']);
 
 }
-
 
 //hashing the password useing the preproccessing 
 UserSchema.pre('save', function (next) {
@@ -163,6 +156,6 @@ UserSchema.pre('save', function (next) {
     }
 })
 
-var User = mongoose.model('user', UserSchema)
+User = mongoose.model('user', UserSchema)
 
 module.exports = { User }

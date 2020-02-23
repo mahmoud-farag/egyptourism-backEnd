@@ -1,8 +1,8 @@
-const _ = require('lodash');
-const { User } = require('./../models/user');
-const bcrypt = require('bcryptjs');
+const _ = require('lodash'),
+    { User } = require('./../models/user'),
+    bcrypt = require('bcryptjs')
 
-var login = async (req, res, next) => {
+exports.login = async (req, res, next) => {
 
     try {
         var email = req.body.email
@@ -12,7 +12,7 @@ var login = async (req, res, next) => {
         if (result) {
             try {
                 var token = await user.genAuthToken();
-                res.header('X-Auth', token).status(200).send(user);
+                res.header('Auth', token).status(200).send(user);
             } catch (e) {
                 res.status(401).json(e)
             }
@@ -24,7 +24,7 @@ var login = async (req, res, next) => {
     }
 }
 
-var get_all = async (req, res) => {
+exports.get_all = async (req, res) => {
 
     try {
         var users = await User.find();
@@ -35,7 +35,7 @@ var get_all = async (req, res) => {
     }
 }
 
-var getUserById = async (req, res) => {
+exports.getUserById = async (req, res) => {
 
     try {
 
@@ -53,7 +53,7 @@ var getUserById = async (req, res) => {
     }
 }
 
-var signUp = async (req, res) => {
+exports.signUp = async (req, res) => {
 
     try {
         var body = _.pick(req.body, ['username', 'email', 'password']);
@@ -61,12 +61,12 @@ var signUp = async (req, res) => {
         var user = new User(body)
         var result = await user.save();
         var token = await user.genAuthToken();
-        res.header('X-Auth', token).status(200).send(result);
+        res.header('Auth', token).status(200).send(result);
     } catch (error) {
         res.status(400).send(error)
     }
 }
-var deleteUser = async (req, res) => {
+exports.deleteUser = async (req, res) => {
     try {
         var user = await User.findByIdAndDelete(req.params.id);
         if (!user) {
@@ -78,7 +78,7 @@ var deleteUser = async (req, res) => {
         res.status(400).send(error)
     }
 }
-var update = async (req, res) => {
+exports.update = async (req, res) => {
     try {
         var user = await User.findByIdAndUpdate(req.params.id);
         if (!user) {
@@ -94,4 +94,4 @@ var update = async (req, res) => {
         res.status(400).send(error)
     }
 }
-module.exports = { login, get_all, getUserById, signUp, deleteUser, update }
+// module.exports = { login, get_all, getUserById, signUp, deleteUser, update }

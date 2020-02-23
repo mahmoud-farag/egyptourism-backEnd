@@ -1,16 +1,16 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
-const { db } = require('./configerations.js/dbConfig');
-const user_router = require('./routes/user_router');
-const travel_raouter = require('./routes/travel_router')
-const cors = require('cors');
+const express = require('express'),
+	bodyParser = require('body-parser'),
+	path = require('path'),
+	{ db } = require('./configerations/dbConfig'),
+	user_router = require('./routes/user_router'),
+	travel_raouter = require('./routes/travel_router'),
+	cors = require('cors'),
+	PORT = process.env.PORT || 4000,
+	app = express();
+
 require('dotenv').config()
-const PORT = process.env.PORT || 4000;
-const app = express();
 app.use(cors())
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json())
 
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static('client/build'));
@@ -19,15 +19,11 @@ if (process.env.NODE_ENV === "production") {
 	})
 }
 app.use('/user', user_router);
-app.get('/user', (req, res) => {
-	res.send('Egyptorism')
-})
 app.use('/travls', travel_raouter)
 
 app.listen(PORT, () => {
 	console.log(`server running on port  ${PORT}`);
 });
-
 
 
 module.exports = { app }

@@ -25,17 +25,19 @@
 		"client-install": "npm install --prefix client",
 		"start": "node app.js",
 		"server": "nodemon app.js",
-		"client": "npm start --prefix clinet",
+		"client": "npm start --prefix client",
 		"dev": "concurrently \"npm run server \"  \"npm run client\"",
-		"test": "mocha ",
+		"test": "mocha --timeout 10000",
 		"test-watch": "nodemon --exec \"npm test\"",
 		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=FALSE npm install --prefix client && npm run build --prefix client"
 	},
 	"devDependencies": {
+		"chai": "^4.2.0",
+		"chai-http": "^4.3.0",
 		"expect": "^25.1.0",
 		"mocha": "^6.2.2",
 		"nodemon": "^2.0.2",
 		"rewire": "^4.0.1",
 		"supertest": "^4.0.2"
-	},
+	}
 }
