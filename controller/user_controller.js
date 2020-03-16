@@ -8,7 +8,6 @@ exports.login = async (req, res, next) => {
         var email = req.body.email
         var user = await User.findOne({ email });
         var result = await bcrypt.compare(req.body.password, user.password);
-
         if (result) {
             try {
                 var token = await user.genAuthToken();
@@ -38,15 +37,11 @@ exports.get_all = async (req, res) => {
 exports.getUserById = async (req, res) => {
 
     try {
-
         var user = await User.findById(req.params.id);
-
         if (!user) {
             res.status(400).send('user not found');
         } else {
-
             res.status(200).send(user);
-
         }
     } catch (error) {
         res.status(500).send(error);

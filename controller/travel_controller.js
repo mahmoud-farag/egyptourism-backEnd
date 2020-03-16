@@ -1,29 +1,29 @@
 
 
 
-let displayAllReservations = () => {
+exports.displayAllReservations = () => {
 
 
 }
 
-let dispalyClientReservation = () => {
+exports.dispalyClientReservation = () => {
 
 }
 
-let reservInNewTrip = () => {
+exports.reservInNewTrip = () => {
 
 }
 
-let cancleReservation = () => {
+exports.cancleReservation = () => {
 
 
 }
 
-module.exports = {
+// module.exports = {
 
-    displayAllReservations,
-    dispalyClientReservation,
-    reservInNewTrip,
-    cancleReservation
+//     displayAllReservations,
+//     dispalyClientReservation,
+//     reservInNewTrip,
+//     cancleReservation
 
-}
+// }
