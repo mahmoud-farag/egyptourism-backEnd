@@ -1,44 +1,41 @@
 {
-	"name": "Egyptorism",
-	"version": "1.0.0",
-	"description": "",
-	"main": "app.js",
-	"author": "mahmoud-farag",
-	"license": "ISC",
-	"dependencies": {
-		"bcryptjs": "^2.4.3",
-		"body-parser": "^1.19.0",
-		"concurrently": "^5.1.0",
-		"cors": "^2.8.5",
-		"create-react-app": "^3.3.1",
-		"custom-env": "^1.0.2",
-		"dotenv": "^8.2.0",
-		"express": "^4.17.1",
-		"jsonwebtoken": "^8.5.1",
-		"lodash": "^4.17.15",
-		"mongoose": "^5.7.9",
-		"nodemailer": "^6.4.3",
-		"react": "^16.12.0",
-		"react-dom": "^16.12.0",
-		"validator": "^12.1.0"
-	},
-	"scripts": {
-		"client-install": "npm install --prefix client",
-		"start": "node app.js",
-		"server": "nodemon app.js",
-		"client": "npm start --prefix client",
-		"dev": "concurrently \"npm run server \"  \"npm run client\"",
-		"test": "mocha --timeout 10000",
-		"test-watch": "nodemon --exec \"npm test\"",
-		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=FALSE npm install --prefix client && npm run build --prefix client"
-	},
-	"devDependencies": {
-		"chai": "^4.2.0",
-		"chai-http": "^4.3.0",
-		"expect": "^25.1.0",
-		"mocha": "^6.2.2",
-		"nodemon": "^2.0.2",
-		"rewire": "^4.0.1",
-		"supertest": "^4.0.2"
-	}
+  "name": "Egyptorism",
+  "version": "1.0.0",
+  
+  "description": "",
+  "main": "app.js",
+  "author": "mahmoud-farag",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.1.0",
+    "cors": "^2.8.5",
+    "create-react-app": "^3.3.1",
+    "custom-env": "^1.0.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.7.9",
+    "nodemailer": "^6.4.3",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "validator": "^12.1.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "test": "mocha --timeout 10000",
+    "test-watch": "nodemon --exec \"npm test\""
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "expect": "^25.1.0",
+    "mocha": "^6.2.2",
+    "nodemon": "^2.0.2",
+    "rewire": "^4.0.1",
+    "supertest": "^4.0.2"
+  }
 }
