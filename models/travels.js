@@ -1,58 +1,29 @@
-let mongoose = require('mongoose');
+let mongoose = require("mongoose"),
+  ObjectID = require("mongodb").ObjectID;
 
-let travelSchema = mongoose.Schema;
-
-travelSchema = new mongoose.Schema({
-
-    username: {
-
-        type: String,
-        required: true,
-        trim: true,
-        minlength: 1
-
-    },
-    email: {
-
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        validate: {
-
-
-            validator: validator.isEmail,
-            message: `{value} is not a valid email`
-        }
-
-
-    },
-    startDay: {
-
-        type: Date,
-        required: true,
-    },
-    endDay: {
-
-        type: Date,
-        required: true,
-    },
-    // tokens: [{
-
-    //     access: {
-    //         type: String,
-    //         required: true
-    //     },
-    //     token: {
-    //         type: String,
-    //         required: true
-    //     }
-
-
-    // }]
+var travelSchema = new mongoose.Schema({
+  image: {
+    type: String,
+    trim: true,
+  },
+  name: {
+    type: String,
+    trim: true,
+  },
+  description: {
+    type: String,
+  },
+  date: {
+    type: String,
+  },
+  price: {
+    type: Number,
+  },
 });
 
-let travel = mongoose.model('travels', travelSchema)
+Travel = mongoose.model("travels", travelSchema);
+module.exports = { Travel };
 
-
-module.exports = { travel }
+////////////////////////////////
+////////////////////////////////
+//////////////////////////////////

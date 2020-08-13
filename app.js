@@ -28,12 +28,13 @@ app.use(express.json());
 //     res.rendFile(path.resolve(__dirname, "client", "build", "index.html"));
 //   });
 // }
-app.get("*", (req, res) => {
-  res.send("Server is UP");
-});
-app.use("/user", user_router);
-app.use("/travls", travel_router);
 
+app.use("/user", user_router);
+app.use("/travels", travel_router);
+
+app.get("*", (req, res) => {
+  res.send("egypTTourism web Server is UP");
+});
 app.listen(PORT, () => {
   console.log(`server running on port  ${PORT}`);
 });

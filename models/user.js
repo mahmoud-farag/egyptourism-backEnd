@@ -64,30 +64,6 @@ UserSchema.statics.findByToken = function (token) {
   });
 };
 
-// UserSchema.statics.FindByGroup = function (email,password){
-
-//     var  UserModel =this;
-
-//      return  UserModel.findOne({email}).then((user)=>{
-
-//           if(!user)
-//               return Promise.reject('emial not found');
-
-//           return new Promise((resolve ,reject) =>{
-//              bcrypt.compare(password,user.password,(error,result)=>{
-
-//                   if(result)
-//                      resolve(user)
-//                   else
-//                      reject('invalid email or password')
-//                    })
-//               })
-//      })
-
-// }
-/*
-    the user instaces methods
-  */
 //generating the Authentication token for each user
 UserSchema.methods.genAuthToken = function () {
   var userInstance = this;

@@ -6,7 +6,7 @@ exports.login = async (req, res, next) => {
   try {
     var email = req.body.email;
     var user = await User.findOne({ email });
-    console.log(user);
+    // console.log(user);
     var result = await bcrypt.compare(req.body.password, user.password);
     if (result) {
       try {
@@ -57,7 +57,7 @@ exports.signUp = async (req, res) => {
       password: req.body.password,
     };
     // _.pick(req.body, ["name", "email", "password"]);
-    console.log(body);
+    // console.log(body);
     var user = new User(body);
     var result = await user.save();
     // console.log("result:  " + result);
@@ -77,8 +77,8 @@ exports.signUp = async (req, res) => {
 exports.deleteUser = async (req, res) => {
   try {
     var email = req.body.email;
-    console.log("email" + email);
-    var user = await User.findOne(email);
+    // console.log("email" + email);
+    var user = await User.findOneAndRemove(email);
     console.log("deleted user" + user);
     if (!user) {
       res.status(400).send("user not found");
