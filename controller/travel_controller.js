@@ -1,10 +1,7 @@
 const {
-  Travel,
-  addTrip,
-  findTrip,
-  getAllTrips,
+  Travel
 } = require("./../models/travels");
-const travels = require("./../models/travels");
+
 
 exports.addNewTrip = async (req, res) => {
   try {

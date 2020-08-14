@@ -4,6 +4,7 @@ const express = require("express"),
   { db } = require("./configerations/dbConfig"),
   user_router = require("./routes/user_router"),
   travel_router = require("./routes/travel_router"),
+  booking_router = require("./routes/booking_router"),
   cors = require("cors"),
   PORT = process.env.PORT || 4000,
   app = express();
@@ -31,6 +32,7 @@ app.use(express.json());
 
 app.use("/user", user_router);
 app.use("/travels", travel_router);
+app.use("/booking", booking_router);
 
 app.get("*", (req, res) => {
   res.send("egypTTourism web Server is UP");
