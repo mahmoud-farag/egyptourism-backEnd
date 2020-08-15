@@ -1,7 +1,4 @@
-const {
-  Travel
-} = require("./../models/travels");
-
+const { Travel } = require("./../models/travels");
 
 exports.addNewTrip = async (req, res) => {
   try {
@@ -49,10 +46,12 @@ exports.getTrip = async (req, res) => {
   }
 };
 
+
+// trip_controller server side
 exports.deleteTrip = async (req, res) => {
   try {
     var _id = req.body._id;
-    console.log("_id" + _id);
+    console.log("_id: " + _id); //_id: undefined
     var trip = await Travel.findByIdAndRemove(_id);
 
     console.log("deleted trip:" + trip);
