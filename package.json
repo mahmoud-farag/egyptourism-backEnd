@@ -1,7 +1,6 @@
 {
   "name": "Egyptorism",
   "version": "1.0.0",
-  "proxy": "https://5f38c98ef18c09000734e086--nervous-knuth-79e018.netlify.app/",
   "description": "",
   "main": "app.js",
   "author": "mahmoud-farag",
