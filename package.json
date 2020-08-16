@@ -1,7 +1,7 @@
 {
   "name": "Egyptorism",
   "version": "1.0.0",
-  
+  "proxy": "https://egyptourism-api.herokuapp.com",
   "description": "",
   "main": "app.js",
   "author": "mahmoud-farag",
