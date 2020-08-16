@@ -1,5 +1,5 @@
 const mongoose = require("mongoose"),
-  { Booking } = require("../models/Booking"),
+  { Booking } = require("../models/booking"),
   chai = require("chai"),
   chaiHttp = require("chai-http"),
   { app } = require("../app"),
