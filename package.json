@@ -32,7 +32,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "expect": "^25.1.0",
-    "mocha": "^6.2.2",
+    "mocha": "^10.2.0",
     "nodemon": "^2.0.2",
     "rewire": "^4.0.1",
     "supertest": "^4.0.2"
